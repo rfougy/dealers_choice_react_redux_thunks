@@ -6,7 +6,9 @@ const path = require("path");
 
 //Middlware...
 app.use("/dist", express.static(path.join(__dirname, "dist")));
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "./public/index.html"))
+);
 
 //Route Requests...
 app.get("/", (req, res, next) => {
@@ -45,6 +47,15 @@ app.post("/api/pokemon", async (req, res, next) => {
   try {
     const newPokemon = await Pokemon.create(req.body);
     res.send(newPokemon);
+  } catch (err) {
+    next(err);
+  }
+});
+app.put("/api/pokemon", async (req, res, next) => {
+  try {
+    const selectedPokemon = await Pokemon.findByPk(req.params.id);
+    await selectedPokemon.update(req.body);
+    res.send(selectedPokemon);
   } catch (err) {
     next(err);
   }

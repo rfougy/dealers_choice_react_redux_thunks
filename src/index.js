@@ -1,4 +1,9 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React from "react";
+import { render } from "react-dom";
+import { connect, Provider } from 'react-redux';
 
-render(<hr />, document.querySelector('#root'));
+class App extends React.Component{
+  
+}
+
+render(<hr />, document.querySelector("#root"));
