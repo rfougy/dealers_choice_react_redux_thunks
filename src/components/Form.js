@@ -22,7 +22,7 @@ class Form extends Component {
             <input
               name="name"
               value={name}
-              onChange={(ev) => this.setState({ name: ev.target.value })}
+              onChange={(event) => this.setState({ name: event.target.value })}
             />
           </div>
           <div>
@@ -31,7 +31,9 @@ class Form extends Component {
             <input
               name="element"
               value={element}
-              onChange={(ev) => this.setState({ element: ev.target.value })}
+              onChange={(event) =>
+                this.setState({ element: event.target.value })
+              }
             />
           </div>
           <div>
@@ -40,10 +42,10 @@ class Form extends Component {
             <input
               name="owner"
               value={owner}
-              onChange={(ev) => this.setState({ owner: ev.target.value })}
+              onChange={(event) => this.setState({ owner: event.target.value })}
             />
           </div>
-          <button type="submit">SUBMIT</button>
+          <button type="submit" onClick={() => this.props.create(this.state)}>SUBMIT</button>
         </form>
       </div>
     );

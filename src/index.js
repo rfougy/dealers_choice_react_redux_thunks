@@ -7,11 +7,6 @@ import PokemonList from "./components/PokemonList";
 import Form from "./components/Form";
 
 class App extends React.Component {
-  async componentDidMount() {
-    const data = await axios.get("/api/pokemon").data;
-    console.log(data);
-  }
-
   render() {
     return (
       <div>
