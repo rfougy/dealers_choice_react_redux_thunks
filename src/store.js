@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import logger from "redux-logger";
 
 //////////////// CREATING STORE AND REDUCER FUNC ////////////////
 
@@ -25,7 +26,7 @@ const pokemonReducer = (state = initialState, action) => {
       state = {
         ...state,
         pokemonList: state.pokemonList.map((pokemon) =>
-          pokemon.id === action.pokemon.id ? action.grocery : grocery
+          pokemon.id === action.pokemon.id ? action.pokemon : pokemon
         ),
       };
     case DELETE:
@@ -40,7 +41,7 @@ const pokemonReducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(pokemonReducer(), applyMiddleware(...middleware));
+const store = createStore(pokemonReducer, applyMiddleware(thunk, logger));
 
 //////////////// CONNECTORS ////////////////
 

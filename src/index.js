@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { render } from "react-dom";
 import { connect, Provider } from "react-redux";
+import store from "./store";
 //Components...
 import PokemonList from "./components/PokemonList";
 import Form from "./components/Form";
