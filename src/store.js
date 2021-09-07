@@ -1,5 +1,5 @@
 import axios from "axios";
-import { creatStore } from "redux";
+import { createStore } from "redux";
 
 //////////////// CREATING STORE AND REDUCER FUNC ////////////////
 
@@ -7,7 +7,7 @@ const initialState = {
   pokemonList: [],
 };
 
-const store = creatStore((state = initialState, action) => {
+const store = createStore((state = initialState, action) => {
   if (action.type === "LOAD") {
     state = { ...state, pokemonList: action.pokemonList };
   }
@@ -40,6 +40,15 @@ export const loadPokemon = () => {
     dispatch({
       type: "LOAD",
       pokemonList,
+    });
+  };
+};
+export const createPokemon = () => {
+  return async (dispatch) => {
+    const newPokemon = (await axios.post("api/pokemon")).data;
+    dispatch({
+      type: "POST",
+      pokemon: newPokemon,
     });
   };
 };
