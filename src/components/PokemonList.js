@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class PokemonList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      pokemonList: [],
-    };
-  }
-  async componentDidMount() {
-    this.setState({
-      pokemonList: (await axios.get("/api/pokemon")).data,
-    });
-    console.log(this.state.pokemonList);
-  }
+  //PREVIOUS CODE...
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     pokemonList: [],
+  //   };
+  // }
+  //
+  // async componentDidMount() {
+  //   this.setState({
+  //     pokemonList: (await axios.get("/api/pokemon")).data,
+  //   });
+  //   console.log(this.state.pokemonList);
+  // }
+
   render() {
     const pokemonListRender = this.state.pokemonList.map((pokemon) => {
       return (
