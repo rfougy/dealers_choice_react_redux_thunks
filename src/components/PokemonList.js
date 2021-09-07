@@ -6,7 +6,6 @@ import {
   updatePokemon,
   deletePokemon,
 } from "../store";
-import axios from "axios";
 
 class PokemonList extends Component {
   //***Component is not able to retrieve the state from the store
@@ -32,7 +31,6 @@ class PokemonList extends Component {
 
   render() {
     console.log("render successful");
-    console.log(this.state);
     const pokemonListRender = this.props.pokemonList.map((pokemon) => {
       return (
         <div key={pokemon.id}>
@@ -51,7 +49,7 @@ class PokemonList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  pokemonList: state.pokemonReducer,
+  pokemonList: state.pokemonList,
 });
 
 export default connect(mapStateToProps, { loadPokemon })(PokemonList);
