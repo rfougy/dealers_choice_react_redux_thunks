@@ -8,22 +8,6 @@ import {
 } from "../store";
 
 class PokemonList extends Component {
-  //***Component is not able to retrieve the state from the store
-  // PREVIOUS CODE...
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     pokemonList: [],
-  //   };
-  // }
-  //
-  // async componentDidMount() {
-  //   this.setState({
-  //     pokemonList: (await axios.get("/api/pokemon")).data,
-  //   });
-  //   console.log(this.state.pokemonList);
-  // }
-
   componentDidMount() {
     console.log("mounting successful");
     this.props.loadPokemon();
@@ -31,6 +15,7 @@ class PokemonList extends Component {
 
   render() {
     console.log("render successful");
+    console.log(this.props.pokemonList);
     const pokemonListRender = this.props.pokemonList.map((pokemon) => {
       return (
         <div key={pokemon.id}>
@@ -53,3 +38,18 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { loadPokemon })(PokemonList);
+
+// PREVIOUS CODE...
+// constructor() {
+//   super();
+//   this.state = {
+//     pokemonList: [],
+//   };
+// }
+//
+// async componentDidMount() {
+//   this.setState({
+//     pokemonList: (await axios.get("/api/pokemon")).data,
+//   });
+//   console.log(this.state.pokemonList);
+// }

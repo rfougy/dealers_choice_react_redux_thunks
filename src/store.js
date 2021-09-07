@@ -5,10 +5,10 @@ import logger from "redux-logger";
 
 //////////////// CREATING STORE AND REDUCER FUNC ////////////////
 
-const initialState = {
-  pokemonList: [],
-  selectedPokemon: {},
-};
+// const initialState = {
+//   pokemonList: [],
+//   selectedPokemon: {},
+// };
 const middleware = [thunk];
 
 const LOAD = "LOAD";
@@ -16,34 +16,30 @@ const POST = "POST";
 const PUT = "PUT";
 const DELETE = "DELETE";
 
-const pokemonReducer = (state = initialState, action) => {
+const pokemonReducer = (state = [], action) => {
   switch (action.type) {
     case LOAD:
-      state = { ...state, pokemonList: action.pokemonList };
+      state = action.pokemonList;
     case POST:
-      state = { ...state, pokemonList: action.pokemon };
-    case PUT:
-      state = {
-        ...state,
-        pokemonList: state.pokemonList.map((pokemon) =>
-          pokemon.id === action.pokemon.id ? action.pokemon : pokemon
-        ),
-      };
-    case DELETE:
-      state = {
-        ...state,
-        pokemonList: state.pokemonList.reduce((accum, pokemon) => {
-          if (pokemon.id !== action.pokemon.id) accum.push(pokemon);
-        }, []),
-      };
+      state = [...state, action.pokemon];
+    // case PUT:
+    //   state = state.map((pokemon) =>
+    //     pokemon.id === action.pokemon.id ? action.pokemon : pokemon
+    //   );
+    // case DELETE:
+    //   state = state.pokemonList.reduce((accum, pokemon) => {
+    //     if (pokemon.id !== action.pokemon.id) accum.push(pokemon);
+    //   }, []);
     default:
       return state;
   }
 };
 
-const store = createStore(pokemonReducer, applyMiddleware(thunk, logger));
+const allReducers = combineReducers({ pokemonList: pokemonReducer });
 
-//////////////// CONNECTORS ////////////////
+const store = createStore(allReducers, applyMiddleware(thunk, logger));
+
+//////////////// ACTION CREATORS ////////////////
 
 export const loadPokemon = () => async (dispatch) => {
   const pokemonList = (await axios.get("api/pokemon")).data;
@@ -53,7 +49,7 @@ export const loadPokemon = () => async (dispatch) => {
   });
 };
 export const createPokemon = () => async (dispatch) => {
-  const newPokemon = (await axios.post("api/pokemon")).data;
+  const newPokemon = (await axios.post("api/pokemon/${pokemon.id}")).data;
   dispatch({
     type: POST,
     pokemon: newPokemon,
