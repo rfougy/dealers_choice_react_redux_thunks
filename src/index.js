@@ -17,4 +17,9 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.querySelector("#root"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);

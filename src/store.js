@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
 //////////////// CREATING STORE AND REDUCER FUNC ////////////////
 
@@ -7,7 +7,7 @@ const initialState = {
   pokemonList: [],
 };
 
-const store = createStore((state = initialState, action) => {
+const pokemonReducer = (state = initialState, action) => {
   if (action.type === "LOAD") {
     state = { ...state, pokemonList: action.pokemonList };
   }
@@ -31,6 +31,8 @@ const store = createStore((state = initialState, action) => {
     };
   }
 });
+
+const store = createStore(pokemonReducer(), applyMiddleware());
 
 //////////////// CONNECTORS ////////////////
 
